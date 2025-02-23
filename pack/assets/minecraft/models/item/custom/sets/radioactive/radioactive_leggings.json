@@ -1,0 +1,14 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "gamula/sets/radioactive/radioactive_leggings",
+		"layer1": "gamula/sets/radioactive/radioactive_leggings"
+	},
+	"display": {
+		"gui": {
+			"translation": [0, 0.1, 0],
+			"scale": [1, 0.875, 1]
+		}
+	}
+}

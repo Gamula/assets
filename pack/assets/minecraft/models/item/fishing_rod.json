@@ -1,0 +1,43 @@
+{
+    "parent": "item/handheld_rod",
+    "textures": {
+        "layer0": "item/fishing_rod"
+    },
+    "overrides": [
+        {"predicate": {"cast": 1}, "model": "item/fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 1}, "model": "item/custom/rods/amethyst_fishing_rod"},
+        {"predicate": {"custom_model_data": 1, "cast": 1}, "model": "item/custom/rods/amethyst_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 2}, "model": "item/custom/rods/copper_fishing_rod"},
+        {"predicate": {"custom_model_data": 2, "cast": 1}, "model": "item/custom/rods/copper_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 3}, "model": "item/custom/rods/coral_fishing_rod"},
+        {"predicate": {"custom_model_data": 3, "cast": 1}, "model": "item/custom/rods/coral_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 4}, "model": "item/custom/rods/diamond_fishing_rod"},
+        {"predicate": {"custom_model_data": 4, "cast": 1}, "model": "item/custom/rods/diamond_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 5}, "model": "item/custom/rods/end_fishing_rod"},
+        {"predicate": {"custom_model_data": 5, "cast": 1}, "model": "item/custom/rods/end_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 6}, "model": "item/custom/rods/gemstone_fishing_rod"},
+        {"predicate": {"custom_model_data": 6, "cast": 1}, "model": "item/custom/rods/gemstone_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 7}, "model": "item/custom/rods/golden_fishing_rod"},
+        {"predicate": {"custom_model_data": 7, "cast": 1}, "model": "item/custom/rods/golden_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 8}, "model": "item/custom/rods/ice_fishing_rod"},
+        {"predicate": {"custom_model_data": 8, "cast": 1}, "model": "item/custom/rods/ice_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 9}, "model": "item/custom/rods/iron_fishing_rod"},
+        {"predicate": {"custom_model_data": 9, "cast": 1}, "model": "item/custom/rods/iron_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 10}, "model": "item/custom/rods/magma_fishing_rod"},
+        {"predicate": {"custom_model_data": 10, "cast": 1}, "model": "item/custom/rods/magma_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 11}, "model": "item/custom/rods/molten_fishing_rod"},
+        {"predicate": {"custom_model_data": 11, "cast": 1}, "model": "item/custom/rods/molten_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 12}, "model": "item/custom/rods/nether_fishing_rod"},
+        {"predicate": {"custom_model_data": 12, "cast": 1}, "model": "item/custom/rods/nether_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 13}, "model": "item/custom/rods/netherite_fishing_rod"},
+        {"predicate": {"custom_model_data": 13, "cast": 1}, "model": "item/custom/rods/netherite_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 14}, "model": "item/custom/rods/prismarine_fishing_rod"},
+        {"predicate": {"custom_model_data": 14, "cast": 1}, "model": "item/custom/rods/prismarine_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 15}, "model": "item/custom/rods/sculk_fishing_rod"},
+        {"predicate": {"custom_model_data": 15, "cast": 1}, "model": "item/custom/rods/sculk_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 16}, "model": "item/custom/rods/slime_fishing_rod"},
+        {"predicate": {"custom_model_data": 16, "cast": 1}, "model": "item/custom/rods/slime_fishing_rod_cast"},
+        {"predicate": {"custom_model_data": 18}, "model": "item/custom/rods/crocodile_fishing_rod"},
+        {"predicate": {"custom_model_data": 18, "cast": 1}, "model": "item/custom/rods/crocodile_fishing_rod_cast"}
+    ]
+}

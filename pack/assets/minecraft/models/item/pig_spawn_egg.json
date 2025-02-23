@@ -1,0 +1,22 @@
+{
+    "parent": "item/template_spawn_egg",
+    "overrides": [
+        {"predicate": {"custom_model_data": 4}, "model": "item/custom/bugs/praying_mantis_display"},
+        {"predicate": {"custom_model_data": 5}, "model": "item/custom/bugs/butterflies/redbutterfly_display"},
+        {"predicate": {"custom_model_data": 6}, "model": "item/custom/bugs/butterflies/bluebutterfly_display"},
+        {"predicate": {"custom_model_data": 7}, "model": "item/custom/bugs/butterflies/yellowbutterfly_display"},
+        {"predicate": {"custom_model_data": 8}, "model": "item/custom/bugs/butterflies/whitebutterfly_display"},
+        {"predicate": {"custom_model_data": 9}, "model": "item/custom/bugs/butterflies/violetbutterfly_display"},
+        {"predicate": {"custom_model_data": 10}, "model": "item/custom/bugs/butterflies/indigobutterfly_display"},
+        {"predicate": {"custom_model_data": 11}, "model": "item/custom/bugs/firefly_display"},
+        {"predicate": {"custom_model_data": 14}, "model": "item/custom/bugs/tarantula_display"},
+        {"predicate": {"custom_model_data": 15}, "model": "item/custom/bugs/ant_farm"},
+        {"predicate": {"custom_model_data": 23},"model": "item/custom/diving/magic_lantern/magic_lantern"},
+        {"predicate": {"custom_model_data": 24},"model": "item/custom/diving/magic_lantern/magic_lantern_debris"},
+        {"predicate": {"custom_model_data": 25},"model": "item/custom/diving/magic_lantern/magic_lantern_diamond"},
+        {"predicate": {"custom_model_data": 26},"model": "item/custom/diving/magic_lantern/magic_lantern_emerald"},
+        {"predicate": {"custom_model_data": 27},"model": "item/custom/diving/magic_lantern/magic_lantern_gold"},
+        {"predicate": {"custom_model_data": 28},"model": "item/custom/diving/magic_lantern/magic_lantern_lapis"},
+        {"predicate": {"custom_model_data": 29},"model": "item/custom/diving/magic_lantern/magic_lantern_redstone"}
+    ]
+}

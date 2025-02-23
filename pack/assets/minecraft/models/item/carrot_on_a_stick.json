@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:item/handheld_rod",
+    "textures": {
+    "layer0": "minecraft:item/carrot_on_a_stick"
+    },
+    "overrides": [
+        {"predicate": {"custom_model_data":1}, "model": "item/custom/diving/harpoon/harpoon"},
+        {"predicate": {"custom_model_data":2}, "model": "item/custom/diving/harpoon/harpoon_fire"},
+        {"predicate": {"custom_model_data":3}, "model": "item/custom/diving/harpoon/harpoon_frosty"},
+        {"predicate": {"custom_model_data":4}, "model": "item/custom/diving/launcher/launcher"}
+        ]
+}

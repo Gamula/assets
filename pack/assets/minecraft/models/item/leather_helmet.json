@@ -1,0 +1,21 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "item/leather_helmet",
+        "layer1": "item/leather_helmet_overlay"
+    },
+    "overrides": [
+        {"predicate": {"custom_model_data": 2}, "model": "item/custom/sets/enderdragon/enderdragon_helmet"},
+        {"predicate": {"custom_model_data": 10}, "model": "item/custom/sets/oni/oni_helmet"},
+        {"predicate": {"custom_model_data": 11}, "model": "item/custom/sets/sweetheart/sweetheart_helmet"},
+        {"predicate": {"custom_model_data": 12}, "model": "item/custom/sets/easter/easter_helmet"},
+        {"predicate": {"custom_model_data": 13}, "model": "item/custom/sets/buzzlightyear/buzzlightyear_helmet"},
+        {"predicate": {"custom_model_data": 14}, "model": "item/custom/sets/radioactive/radioactive_helmet"},
+        {"predicate": {"custom_model_data": 20}, "model": "item/custom/sets/skills/farming_helmet"},
+        {"predicate": {"custom_model_data": 21}, "model": "item/custom/sets/skills/mining_helmet"},
+        {"predicate": {"custom_model_data": 22}, "model": "item/custom/sets/skills/fishing_helmet"},
+        {"predicate": {"custom_model_data": 23}, "model": "item/custom/sets/fiendskull/fiendskull_helmet"},
+        {"predicate": {"custom_model_data": 33}, "model": "item/custom/sets/gingerbread/helmet"},
+        {"predicate": {"custom_model_data": 37}, "model": "item/custom/sets/crocodile/crocodile_helmet"}
+    ]
+}

@@ -1,0 +1,32 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "item/netherite_axe"
+    },
+    "overrides": [
+        {"predicate": {"custom_model_data": 2}, "model": "item/custom/sets/enderdragon/enderdragon_axe"},
+        {"predicate": {"custom_model_data": 3}, "model": "item/custom/sets/littleduck/littleduck_axe"},
+        {"predicate": {"custom_model_data": 5}, "model": "item/custom/sets/purpleworld/purpleworld_axe"},
+        {"predicate": {"custom_model_data": 6}, "model": "item/custom/sets/purpleworld/purpleworld_battleaxe"},
+        {"predicate": {"custom_model_data": 7}, "model": "item/custom/sets/ruby/axe_ruby_vol_1"},
+        {"predicate": {"custom_model_data": 14}, "model": "item/custom/sets/valerie/axe"},
+        {"predicate": {"custom_model_data": 15}, "model": "item/custom/sets/glitch/axe"},
+        {"predicate": {"custom_model_data": 16}, "model": "item/custom/sets/thunderbolt/axe"},
+        {"predicate": {"custom_model_data": 17}, "model": "item/custom/sets/bonekeeper/axe"},
+        {"predicate": {"custom_model_data": 18}, "model": "item/custom/sets/lunar/axe"},
+        {"predicate": {"custom_model_data": 19}, "model": "item/custom/sets/scythe/scythe_capra"},
+        {"predicate": {"custom_model_data": 20}, "model": "item/custom/sets/oni/axe"},
+        {"predicate": {"custom_model_data": 21}, "model": "item/custom/sets/sweetheart/axe"},
+        {"predicate": {"custom_model_data": 22}, "model": "item/custom/sets/easter/axe"},
+        {"predicate": {"custom_model_data": 23}, "model": "item/custom/sets/sponge/axe"},
+        {"predicate": {"custom_model_data": 24}, "model": "item/custom/sets/starfish/axe"},
+        {"predicate": {"custom_model_data": 25}, "model": "item/custom/sets/pilgrim/axe"},
+        {"predicate": {"custom_model_data": 26}, "model": "item/custom/sets/winter/axe"},
+        {"predicate": {"custom_model_data": 27}, "model": "item/custom/sets/valentines/axe"},
+        {"predicate": {"custom_model_data": 28}, "model": "item/custom/sets/alien/axe"},
+        {"predicate": {"custom_model_data": 29}, "model": "item/custom/sets/shogun/shogun_axe"},
+        {"predicate": {"custom_model_data": 30}, "model": "item/custom/sets/shogun/shogun_hammer"},
+        {"predicate": {"custom_model_data": 31}, "model": "item/custom/sets/crocodile/crocodile_axe"},
+        {"predicate": {"custom_model_data": 32}, "model": "item/custom/sets/crocodile/crocodile_hammer"}
+    ]
+}

@@ -1,0 +1,73 @@
+{
+	"littleroom.magiclantern.apply_element":{
+		"sounds": [
+		"littleroom/magiclantern/apply_element"
+		]
+    },
+    "littleroom.magiclantern.detect":{
+		"sounds": [
+		"littleroom/magiclantern/detect"
+		]
+    },
+    "littleroom.magiclantern.set_down":{
+		"sounds": [
+		"littleroom/magiclantern/set_down"
+		]
+    },
+	"littleroom.mist.traverse": {
+		"sounds": [
+			"littleroom/mist/traverse"
+		]
+	},
+	"littleroom.cranegame.game1": {
+		"sounds": [
+			"littleroom/cranegame/game1"
+		]
+	},
+	"littleroom.cranegame.game2": {
+		"sounds": [
+			"littleroom/cranegame/game2"
+		]
+	},
+	"littleroom.cranegame.game3": {
+		"sounds": [
+			"littleroom/cranegame/game3"
+		]
+	},
+	"littleroom.cranegame.drop": {
+		"sounds": [
+			"littleroom/cranegame/drop"
+		]
+	},
+	"littleroom.cranegame.win": {
+		"sounds": [
+			"littleroom/cranegame/win"
+		]
+	},
+	"littleroom.cranegame.lose": {
+		"sounds": [
+			"littleroom/cranegame/lose"
+		]
+	},
+	"littleroom.cranegame.music_loop": {
+		"sounds": [
+			"littleroom/cranegame/music_loop"
+		]
+	},
+
+	"block.wood.hit": {
+		"sounds": [],
+		"replace": true
+	},
+	"override.block.wood.hit": {
+		"sounds": [
+			"step/wood1",
+			"step/wood2",
+			"step/wood3",
+			"step/wood4",
+			"step/wood5",
+			"step/wood6"
+		],
+		"subtitle": "subtitles.block.generic.hit"
+	}
+}

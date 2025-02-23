@@ -1,0 +1,27 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "item/netherite_pickaxe"
+    },
+    "overrides": [
+        {"predicate": {"custom_model_data": 1}, "model": "item/custom/sets/enderdragon/enderdragon_pickaxe"},
+        {"predicate": {"custom_model_data": 2}, "model": "item/custom/sets/littleduck/littleduck_pickaxe"},
+        {"predicate": {"custom_model_data": 3}, "model": "item/custom/sets/purpleworld/purpleworld_pickaxe"},
+        {"predicate": {"custom_model_data": 10}, "model": "item/custom/sets/valerie/pickaxe"},
+        {"predicate": {"custom_model_data": 11}, "model": "item/custom/sets/glitch/pickaxe"},
+        {"predicate": {"custom_model_data": 12}, "model": "item/custom/sets/thunderbolt/pickaxe"},
+        {"predicate": {"custom_model_data": 13}, "model": "item/custom/sets/bonekeeper/pickaxe"},
+        {"predicate": {"custom_model_data": 14}, "model": "item/custom/sets/lunar/pickaxe"},
+        {"predicate": {"custom_model_data": 15}, "model": "item/custom/sets/oni/pickaxe"},
+        {"predicate": {"custom_model_data": 16}, "model": "item/custom/sets/sweetheart/pickaxe"},
+        {"predicate": {"custom_model_data": 17}, "model": "item/custom/sets/easter/pickaxe"},
+        {"predicate": {"custom_model_data": 18}, "model": "item/custom/sets/sponge/pickaxe"},
+        {"predicate": {"custom_model_data": 19}, "model": "item/custom/sets/starfish/pickaxe"},
+        {"predicate": {"custom_model_data": 20}, "model": "item/custom/sets/pilgrim/pickaxe"},
+        {"predicate": {"custom_model_data": 21}, "model": "item/custom/sets/winter/pickaxe"},
+        {"predicate": {"custom_model_data": 22}, "model": "item/custom/sets/valentines/pickaxe"},
+        {"predicate": {"custom_model_data": 23}, "model": "item/custom/sets/alien/pickaxe"},
+        {"predicate": {"custom_model_data": 24}, "model": "item/custom/sets/shogun/shogun_pickaxe"},
+        {"predicate": {"custom_model_data": 25}, "model": "item/custom/sets/crocodile/crocodile_pickaxe"}
+    ]
+}
