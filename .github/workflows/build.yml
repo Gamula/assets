@@ -1,48 +1,197 @@
-name: "[assets] - build & publish"
+name: "[assets] - build"
 on:
-  push: { branches: [main] }
-  workflow_dispatch: {}
+  push: { branches: [ main ] }
+  workflow_dispatch: { inputs: { ARTIFACT_MODE: { description: "(choice): artifact mode", type: choice, options: [ packsquash, archive ], required: true } } }
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: "[build] - debug"
-        run: |
-          echo "artifact: $REF_ARTIFACT"
-          echo "options: $CONF_TOML"
-      - name: "[build] - clone"
+      - name: "[build:checkout] - clone"
         uses: actions/checkout@v4
         with:
-          # fetch-depth: 0
-          ref: main
-      - name: "[build] - squash"
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: "[build:evaluate] - mode"
+        id: evaluate_mode
+        uses: actions/github-script@v7
+        env:
+          MODE_VAR: ${{ vars.ARTIFACT_MODE }}
+          MODE_INPUT: ${{ inputs.ARTIFACT_MODE }}
+        with:
+          script: |
+            const result = {
+              mode: process.env["MODE_VAR"]
+            }
+            const valid_modes = [ "packsquash", "archive" ]
+            if (!valid_modes.includes(result.mode)) {
+              result.mode = valid_modes.at(0)
+              core.warning(`vars 'ARTIFACT_MODE' was invalid, using '${result.mode}' as default.`)
+            }
+            const event = {
+              name: context.eventName,
+              ref: context.payload,
+              mode: -1
+            }
+            switch (event.name) {
+              case "push":
+                const commit_regex = /^\((.*?)\):\s/i
+                const commit_marker = event.ref.head_commit.message.match(commit_regex)
+                if (!commit_marker || commit_marker.length !== 2) {
+                  break
+                }
+                event.mode = commit_marker.at(1).toLowerCase()
+                break
+              case "workflow_dispatch":
+                event.mode = process.env["MODE_INPUT"].toLowerCase()
+                break
+            }
+            if (event.mode === -1) {
+              core.notice(`event('${event.name}'): using default '${result.mode}' as mode.`)
+            } else if (valid_modes.includes(event.mode)) {
+              result.mode = event.mode
+              core.notice(`event('${event.name}'): using override '${event.mode}' as mode.`)
+            } else {
+              core.error(`event('${event.name}'): unexpected '${event.mode}', using default '${result.mode}' as mode.`)
+            }
+            return result
+
+      - if: ${{ fromJSON(steps.evaluate_mode.outputs.result).mode == 'packsquash' }}
+        name: "[build:artifact] - packsquash"
         uses: ComunidadAylas/PackSquash-action@v4
         with:
-          packsquash_version: latest-unstable
-          artifact_name: ${{ env.ARTIFACT_REF }}
-          options: ${{ env.CONF_TOML }}
+          system_id: ${{ secrets.PACKSQUASH_UID }}
+          action_cache_revision: ${{ secrets.PACKSQUASH_REV }}
+          packsquash_version: ${{ vars.PACKSQUASH_MANIFEST }}
+          options: ${{ env.PACKSQUASH_OPTS }}
+          artifact_name: ${{ vars.ARTIFACT_NAME }}
+
+      - if: ${{ fromJSON(steps.evaluate_mode.outputs.result).mode == 'archive' }}
+        name: "[build:artifact] - archive (7z)"
+        run: 7z a -tzip -mx9 -bb3 "${{ vars.DIST_PATH }}" -w "${{ vars.SRC_PATH }}/."
+
+      - name: "[build:publish] - dist"
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require("fs")
+            const path = require("path")
+            const crypto = require("crypto")
+
+            function fileChecksum(blob, ...options) {
+              const hash = crypto.createHash(...options)
+              return hash
+                .update(blob)
+                .digest("hex")
+            }
+
+            function gitBody(data, fields) {
+              return data.map(line => line.replace(/%s/g, () => fields.shift())).join("\n")
+            }
+
+            function gitOptions(type, env) {
+              const [ owner, repo ] = process.env["GITHUB_REPOSITORY"].split("/")
+              const ref = process.env["GITHUB_REF"]
+              const tag = `v${process.env["GITHUB_RUN_NUMBER"]}`
+              const options = {}
+              switch (type) {
+                case "check":
+                  options["owner"] = owner
+                  options["repo"] = repo
+                  options["tag"] = tag
+                  break
+                case "make":
+                  options["owner"] = owner
+                  options["repo"] = repo
+                  options["tag_name"] = tag
+                  options["target_commitish"] = ref
+                  options["name"] = tag
+                  options["body"] = gitBody(
+                    [
+                      "  - commit: %s",
+                      "  - artifact: %s",
+                      "  - sha checksum: %s"
+                    ],
+                    [
+                      context["payload"]["head_commit"]["message"],
+                      result["file"],
+                      result["sha"]
+                    ]
+                  )
+                  options["make_latest"] = "true"
+                  break
+                case "upload":
+                  options["owner"] = owner
+                  options["repo"] = repo
+                  options["release_id"] = env["id"]
+                  options["name"] = result["file"]
+                  options["label"] = result["file"]
+                  options["data"] = result["blob"]
+                  break
+              }
+              return options
+            }
+
+            async function gitRevExists(options) {
+              return github.rest.repos.getReleaseByTag(options)
+                .then(() => true)
+                .catch(() => false)
+            }
+
+            async function gitRevMake(options) {
+              return github.rest.repos.createRelease(options)
+                .then(({ data }) => data)
+                .then(gitRevUpload)
+            }
+
+            async function gitRevUpload(release) {
+              const options = gitOptions("upload", release)
+              return github.rest.repos.uploadReleaseAsset(options)
+                .then(() => release)
+            }
+
+            const artifact_path = path.resolve("${{ vars.DIST_PATH }}")
+            const artifact_file = path.basename(artifact_path)
+            const artifact_blob = fs.readFileSync(artifact_path)
+            const artifact_sha = fileChecksum(artifact_blob, "sha1")
+            const result = {
+              path: artifact_path,
+              file: artifact_file,
+              blob: artifact_blob,
+              sha: artifact_sha
+            }
+            const options = {
+              check: gitOptions("check"),
+              make: gitOptions("make")
+            }
+            const exists = await gitRevExists(options.check)
+            if (exists) {
+              result.status = "exists"
+              core.error(`publish('${options.check.tag}'): release already exists with tag.`)
+            } else {
+              const created = await gitRevMake(options.make)
+              result.status = "created"
+              result.url = created.html_url
+              core.notice(`publish('${options.make.tag_name}'): created release with tag.`)
+              core.notice(`  -> url: ${result.url}`)
+            }
+            return result
 
 env:
-  ARTIFACT_REF: "artifact-${{ github.event.repository.name }}-${{ github.ref_name }}"
-  CONF_TOML: |
-    pack_directory = "pack"
-    output_file_path = "artifacts/dist.zip"
-    skip_pack_icon = false
-    validate_pack_metadata_file = true
+  PACKSQUASH_OPTS: |
+    pack_directory = "${{ vars.SRC_PATH }}"
+    output_file_path = "${{ vars.DIST_PATH }}"
     recompress_compressed_files = false
     zip_compression_iterations = 32
     automatic_minecraft_quirks_detection = false
-    work_around_minecraft_quirks = [
-      "grayscale_images_gamma_miscorrection",
-      "java8_zip_parsing",
-      "restrictive_banner_layer_texture_format_check",
-      "bad_entity_eye_layer_texture_transparency_blending"
-    ]
-    automatic_asset_types_mask_detection = true
+    work_around_minecraft_quirks = []
+    automatic_asset_types_mask_detection = false
+    allow_mods = ["OptiFine"]
+    skip_pack_icon = false
+    validate_pack_metadata_file = true
     ignore_system_and_hidden_files = true
-    allow_mods = [ "OptiFine" ]
-    zip_spec_conformance_level = "balanced"
+    zip_spec_conformance_level = "disregard"
     size_increasing_zip_obfuscation = true
     percentage_of_zip_structures_tuned_for_obfuscation_discretion = 100
     never_store_squash_times = false
@@ -56,21 +205,15 @@ env:
     always_allow_json_comments = false
 
     ["**/*.png"]
-    image_data_compression_iterations = 16
+    image_data_compression_iterations = 24
     color_quantization_target = "auto"
     color_quantization_dithering_level = 0.85
-    maximum_width_and_height = 8_192
+    maximum_width_and_height = 8192
     skip_alpha_optimizations = true
+    downsize_if_single_color = true
 
     ["**/*.{fsh,vsh,glsl}"]
     shader_source_transformation_strategy = "keep_as_is"
-
-    ["**/*.lang"]
-    minify_legacy_language = true
-    strip_legacy_language_bom = true
-
-    ["**/*.mcfunction"]
-    minify_command_function = true
 
     ["**/*.properties"]
     minify_properties = true
