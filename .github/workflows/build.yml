@@ -101,7 +101,7 @@ jobs:
                   options["repo"] = repo
                   options["tag"] = tag
                   break
-                case "make":
+                case "create":
                   options["owner"] = owner
                   options["repo"] = repo
                   options["tag_name"] = tag
@@ -111,7 +111,7 @@ jobs:
                     [
                       "  - commit: %s",
                       "  - artifact: %s",
-                      "  - sha checksum: %s"
+                      "  - checksum (sha1): %s"
                     ],
                     [
                       context["payload"]["head_commit"]["message"],
@@ -139,7 +139,7 @@ jobs:
                 .catch(() => false)
             }
 
-            async function gitRevMake(options) {
+            async function gitRevCreate(options) {
               return github.rest.repos.createRelease(options)
                 .then(({ data }) => data)
                 .then(gitRevUpload)
@@ -163,18 +163,17 @@ jobs:
             }
             const options = {
               check: gitOptions("check"),
-              make: gitOptions("make")
+              create: gitOptions("create")
             }
             const exists = await gitRevExists(options.check)
             if (exists) {
               result.status = "exists"
-              core.error(`publish('${options.check.tag}'): release already exists with tag.`)
+              core.error(`publish('${options.check.tag}'): release exists with tag.`)
             } else {
-              const created = await gitRevMake(options.make)
+              const created = await gitRevCreate(options.create)
               result.status = "created"
-              result.url = created.html_url
-              core.notice(`publish('${options.make.tag_name}'): created release with tag.`)
-              core.notice(`  -> url: ${result.url}`)
+              core.notice(`publish('${options.create.tag_name}'): created release with tag.`)
+              core.info(`  -> released at: ${created.html_url}`)
             }
             return result
 
