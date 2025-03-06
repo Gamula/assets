@@ -1,0 +1,13 @@
+node_modules/
+bin/
+out/
+dist/
+build/
+target/
+lib/
+*-lock*
+*.lock*
+*.env*
+.DS_Store
+.idea
+.vscode

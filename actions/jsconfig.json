@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    // Module settings
+    "lib": ["ESNext"],
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "moduleDetection": "auto",
+    "allowJs": true,
+
+    // Output mode
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "noErrorTruncation": true,
+    "noEmit": true,
+
+    // Type checking
+    "strict": true,
+    "skipLibCheck": true,
+    "checkJs": true,
+
+    // Project settings
+    "baseUrl": "scripts",
+    "outDir": "dist",
+    "paths": {
+      "@*": ["*.js", "*.cjs", "*.mjs", "*.d.ts"]
+    }
+  },
+  "include": ["**/*.js", "**/*.cjs", "**/*.mjs", "**/*.d.ts"]
+}
