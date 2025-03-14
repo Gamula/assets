@@ -173,3 +173,8 @@ TEXT_EFFECT(240, 240, 124) {
     override_shadow_color(rgb(255, 255, 255));
     apply_shimmer();
 }
+
+TEXT_EFFECT(240, 240, 128) {
+    apply_gradient(rgb(112,255,141), rgb(34,227,179), rgb(61,217,245));
+    apply_shimmer();
+}
