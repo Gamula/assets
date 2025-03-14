@@ -2349,24 +2349,6 @@
       "height": 9
     },
     {
-      "file": "gamula/titles/ranks/title_blitz.png",
-      "ascent": 8,
-      "type": "bitmap",
-      "chars": [
-        ""
-      ],
-      "height": 9
-    },
-    {
-      "file": "gamula/titles/ranks/title_brawl.png",
-      "ascent": 8,
-      "type": "bitmap",
-      "chars": [
-        ""
-      ],
-      "height": 9
-    },
-    {
       "file": "gamula/titles/tiers/title_common.png",
       "ascent": 8,
       "type": "bitmap",
@@ -2408,15 +2390,6 @@
       "type": "bitmap",
       "chars": [
         "柳"
-      ],
-      "height": 9
-    },
-    {
-      "file": "gamula/titles/ranks/title_glitch.png",
-      "ascent": 8,
-      "type": "bitmap",
-      "chars": [
-        "泪"
       ],
       "height": 9
     },
@@ -2475,15 +2448,6 @@
       "height": 9
     },
     {
-      "file": "gamula/titles/ranks/title_puff.png",
-      "ascent": 8,
-      "type": "bitmap",
-      "chars": [
-        "ద"
-      ],
-      "height": 9
-    },
-    {
       "file": "gamula/titles/tiers/title_rare.png",
       "ascent": 8,
       "type": "bitmap",
@@ -2507,15 +2471,6 @@
       "type": "bitmap",
       "chars": [
         "ర"
-      ],
-      "height": 9
-    },
-    {
-      "file": "gamula/titles/ranks/title_twist.png",
-      "ascent": 8,
-      "type": "bitmap",
-      "chars": [
-        "ళ"
       ],
       "height": 9
     },
@@ -2852,6 +2807,20 @@
         "溪"
       ]
   },
+  {
+    "type": "bitmap",
+    "file": "gamula/titles/ranks/title_sbranks.png",
+    "ascent": 8,
+    "height": 9,
+    "chars": [
+      "泪",
+      "",
+      "ర",
+      "ళ",
+      "",
+      "ద"
+    ]
+},
     {"file":"gamula/titles/tags/easter/egg_1.png","ascent":8,"type":"bitmap","chars":["鈘"],"height":9},
     {"file":"gamula/titles/tags/easter/egg_2.png","ascent":8,"type":"bitmap","chars":["鈙"],"height":9},
     {"file":"gamula/titles/tags/easter/egg_3.png","ascent":8,"type":"bitmap","chars":["鈚"],"height":9},
