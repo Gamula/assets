@@ -63,7 +63,7 @@ jobs:
         with:
           system_id: ${{ secrets.PACKSQUASH_UID }}
           action_cache_revision: ${{ secrets.PACKSQUASH_REV }}
-          packsquash_version: ${{ vars.PACKSQUASH_MANIFEST }}
+          packsquash_version: ${{ vars.PACKSQUASH_VER }}
           options: ${{ env.PACKSQUASH_OPTS }}
           artifact_name: ${{ vars.ARTIFACT_NAME }}
 
