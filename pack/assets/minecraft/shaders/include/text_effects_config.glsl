@@ -170,12 +170,21 @@ TEXT_EFFECT(240, 240, 120) {
 TEXT_EFFECT(240, 240, 124) {
     apply_vertical_shadow();
     apply_metalic(rgb(227, 88, 99), rgb(246, 125, 143) * 0.95);
-    override_shadow_color(rgb(255, 255, 255));
     apply_shimmer();
 }
 
 TEXT_EFFECT(240, 240, 128) {
     apply_gradient(rgb(112,255,141), rgb(61,217,245));
-    override_shadow_color(rgb(34,227,179));
     apply_shimmer();
+}
+
+TEXT_EFFECT(240, 240, 132) {
+    apply_gradient(rgb(253,85,106), rgb(253,168,179));
+    apply_shimmer();
+}
+
+TEXT_EFFECT(240, 240, 136) {
+    apply_gradient(rgb(253,85,106), rgb(253,168,179));
+    apply_shimmer();
+    apply_rainbow();
 }
