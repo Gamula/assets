@@ -83,13 +83,13 @@ void remove_text_shadow() {
 void apply_vertical_shadow() {
     if(textData.isShadow) {
         textData.uv.x += 1.0 / 256.0;
-        textData.shouldScale = true;
+        textData.shouldScale = false;
     }
 }
 
 void apply_waving_movement(float speed, float frequency) {
     textData.uv.y += sin(textData.characterPosition.x * 0.1 * frequency - GameTime * 7500.0 * speed) / 256.0;
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 }
 
 void apply_waving_movement(float speed) {
@@ -103,7 +103,7 @@ void apply_waving_movement() {
 void apply_shaking_movement() {
     float noiseX = noise(textData.characterPosition.x + textData.characterPosition.y + GameTime * 32000.0) - 0.5;
     float noiseY = noise(textData.characterPosition.x - textData.characterPosition.y + GameTime * 32000.0) - 0.5;
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 
     textData.uv += vec2(noiseX, noiseY) / 256.0;
 }
@@ -112,7 +112,7 @@ void apply_iterating_movement(float speed, float space) {
     float x = mod(textData.characterPosition.x * 0.4 - GameTime * 18000.0 * speed, (5.0 * space) * TAU);
     if(x > TAU) x = TAU;
     textData.uv.y += (-cos(x) * 0.5 + 0.5) / 256.0;
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 }
 
 void apply_iterating_movement() {
@@ -123,7 +123,7 @@ void apply_flipping_movement(float speed, float space) {
     float t = mod((textData.characterPosition.x * 0.4 - GameTime  * 18000.0 * speed) / TAU, 5.0 * space);
     textData.uv.x = textData.uvCenter.x + (textData.uv.x - textData.uvCenter.x) / (cos(TAU * min(t, 1.0)));
     textData.uv.y = textData.uvCenter.y + (textData.uv.y - textData.uvCenter.y) / (1.0 + 0.1 * sin(TAU * min(t, 1.0)));
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 }
 
 void apply_flipping_movement() {
@@ -135,7 +135,7 @@ void apply_skewing_movement(float speed) {
 
     textData.uv.x = mix(textData.uv.x, textData.uv.x + sin(TAU * t * 0.5) / 256.0, 1.0 - textData.localPosition.y);
     textData.uv.y = mix(textData.uv.y, textData.uvMax.y, -(0.3 + 0.5 * cos(TAU * t)));
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 }
 
 void apply_skewing_movement() { 
@@ -145,7 +145,7 @@ void apply_skewing_movement() {
 void apply_growing_movement(float speed) {
     vec2 offset = vec2(0.0, 5.0 / 256.0);
     textData.uv = (textData.uv - textData.uvCenter - offset) * (sin(GameTime * 12800.0 * speed) * 0.15 + 0.85) + textData.uvCenter + offset;
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 }
 
 void apply_growing_movement() {
@@ -153,7 +153,7 @@ void apply_growing_movement() {
 }
 
 void apply_outline(vec3 color) {
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 
     if(textData.isShadow) {
         color *= 0.25;
@@ -177,7 +177,7 @@ void apply_outline(vec3 color) {
 }
 
 void apply_thin_outline(vec3 color) {
-    textData.shouldScale = true;
+    textData.shouldScale = false;
 
     if(textData.isShadow) {
         color *= 0.25;
@@ -206,10 +206,245 @@ void apply_gradient(vec3 color1, vec3 color2) {
     if(textData.isShadow) textData.color.rgb *= 0.25;
 }
 
-void apply_rainbow() {
+void apply_animated_gradient_3(vec3 color1, vec3 color2, vec3 color3) {
+    float t = 0.05 * (textData.position.x + textData.position.y) - GameTime * 5000.0;
+    float smoothT = fract(t / (2.0 * 3.14159)) * 3.0; // 0 to 3 range
+    
+    vec3 resultColor;
+    if (smoothT < 1.0) {
+        resultColor = mix(color1, color2, smoothT);
+    } else if (smoothT < 2.0) {
+        resultColor = mix(color2, color3, smoothT - 1.0);
+    } else {
+        resultColor = mix(color3, color1, smoothT - 2.0);
+    }
+    
+    textData.color.rgb = resultColor;
+    if(textData.isShadow) textData.color.rgb *= 0.25;
     textData.shouldScale = true;
+}
+
+void apply_animated_gradient_7(vec3 color1, vec3 color2, vec3 color3, vec3 color4, vec3 color5, vec3 color6, vec3 color7) {
+    float t = 0.01 * (textData.position.x + textData.position.y) - GameTime * 500.0;
+    float smoothT = fract(t) * 7.0; // 0 to 7 range
+    
+    vec3 resultColor;
+    if (smoothT < 1.0) {
+        resultColor = mix(color1, color2, smoothT);
+    } else if (smoothT < 2.0) {
+        resultColor = mix(color2, color3, smoothT - 1.0);
+    } else if (smoothT < 3.0) {
+        resultColor = mix(color3, color4, smoothT - 2.0);
+    } else if (smoothT < 4.0) {
+        resultColor = mix(color4, color5, smoothT - 3.0);
+    } else if (smoothT < 5.0) {
+        resultColor = mix(color5, color6, smoothT - 4.0);
+    } else if (smoothT < 6.0) {
+        resultColor = mix(color6, color7, smoothT - 5.0);
+    } else {
+        resultColor = mix(color7, color1, smoothT - 6.0);
+    }
+    
+    float wave = sin(10.0 * t + textData.position.x * 0.2) * 0.5 + 0.5;
+    resultColor = mix(resultColor, vec3(1.0), wave * 0.15);
+    
+    textData.color.rgb = resultColor;
+    if(textData.isShadow) textData.color.rgb *= 0.25;
+}
+
+void apply_animated_gradient_7_smoother(vec3 color1, vec3 color2, vec3 color3, vec3 color4, vec3 color5, vec3 color6, vec3 color7) {
+    float t = 0.01 * (textData.position.x + textData.position.y) - GameTime * 500.0;
+    float smoothT = fract(t) * 12.0; // 0 to 12 range
+    
+    vec3 resultColor;
+    if (smoothT < 1.0) {
+        resultColor = mix(color1, color2, smoothT);
+    } else if (smoothT < 2.0) {
+        resultColor = mix(color2, color3, smoothT - 1.0);
+    } else if (smoothT < 3.0) {
+        resultColor = mix(color3, color4, smoothT - 2.0);
+    } else if (smoothT < 4.0) {
+        resultColor = mix(color4, color5, smoothT - 3.0);
+    } else if (smoothT < 5.0) {
+        resultColor = mix(color5, color6, smoothT - 4.0);
+    } else if (smoothT < 6.0) {
+        resultColor = mix(color6, color7, smoothT - 5.0);
+    } else if (smoothT < 7.0) {
+        resultColor = mix(color7, color6, smoothT - 6.0);
+    } else if (smoothT < 8.0) {
+        resultColor = mix(color6, color5, smoothT - 7.0);
+    } else if (smoothT < 9.0) {
+        resultColor = mix(color5, color4, smoothT - 8.0);
+    } else if (smoothT < 10.0) {
+        resultColor = mix(color4, color3, smoothT - 9.0);
+    } else if (smoothT < 11.0) {
+        resultColor = mix(color3, color2, smoothT - 10.0);
+    } else {
+        resultColor = mix(color2, color1, smoothT - 11.0);
+    }
+    
+    float wave = sin(10.0 * t + textData.position.x * 0.2) * 0.5 + 0.5;
+    resultColor = mix(resultColor, vec3(1.0), wave * 0.15);
+    
+    textData.color.rgb = resultColor;
+    if(textData.isShadow) textData.color.rgb *= 0.25;
+}
+
+void apply_character_cycle(vec3 startRGB, vec3 endRGB, float speed, float frequency) {
+    // Time and position based calculation
+    float timeOffset = GameTime * 500 * speed;
+    float positionOffset = textData.characterPosition.x * frequency;
+    
+    // Simple wave calculation
+    float wave = sin(positionOffset - timeOffset) * 0.5 + 0.5;
+    
+    // Direct color interpolation
+    textData.color.rgb = mix(startRGB, endRGB, wave);
+    
+    // Simple shadow
+    if (textData.isShadow) {
+        textData.color.rgb *= 0.25;
+    }
+    textData.shouldScale = true;
+}
+
+void apply_rainbow() {
     textData.color.rgb = hsvToRgb(vec3(0.005 * (textData.position.x + textData.position.y) - GameTime * 300.0, 0.7, 1.0));
     if(textData.isShadow) textData.color.rgb *= 0.25;
+    textData.shouldScale = true;
+}
+
+void apply_pastel_rainbow() {
+    vec3 hsvColor = vec3(0.005 * (textData.position.x + textData.position.y) - GameTime * 300.0, 0.3, 0.95);
+    textData.color.rgb = hsvToRgb(hsvColor);
+    if(textData.isShadow) textData.color.rgb *= 0.25;
+}
+
+float red_fractal_rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+}
+
+float red_fractal_noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u*u*(3.0-2.0*u);
+
+    float res = mix(
+        mix(red_fractal_rand(ip),red_fractal_rand(ip+vec2(1.0,0.0)),u.x),
+        mix(red_fractal_rand(ip+vec2(0.0,1.0)),red_fractal_rand(ip+vec2(1.0,1.0)),u.x),u.y);
+    return res*res;
+}
+
+float red_fractal_fbm( vec2 p ) {
+    return 0.516129 * red_fractal_noise( p + GameTime * 1200.0);
+}
+
+void apply_red_fractal() {
+    #ifdef FSH
+        vec2 uv = vec2(gl_FragCoord.xy) / 100.0;
+        float shade = red_fractal_fbm(uv);
+        shade = pow(shade, 0.7);
+        vec3 deepRed = vec3(0.4, 0.0, 0.0);
+        vec3 brightRed = vec3(1.0, 0.0, 0.0);
+        vec3 lightRed = vec3(1.0, 0.4, 0.4);
+        vec3 paleRed = vec3(1.0, 0.5, 0.5);
+        vec3 veryPaleRed = vec3(1.0, 0.9, 0.9);
+        vec3 pureWhite = vec3(1.0, 1.0, 1.0);
+        vec3 color1 = mix(deepRed, brightRed, shade);
+        vec3 color2 = mix(brightRed, lightRed, shade);
+        vec3 color3 = mix(lightRed, paleRed, shade);
+        vec3 color4 = mix(paleRed, veryPaleRed, shade);
+        vec3 color5 = mix(veryPaleRed, pureWhite, shade);
+        vec3 finalColor1 = mix(mix(color1, color2, shade), mix(color3, color4, shade), shade);
+        vec3 finalColor2 = mix(finalColor1, color5, shade);
+        textData.color.rgb = finalColor2;
+        if(textData.isShadow) {
+            textData.color.rgb *= 0.25;
+        }
+    #endif
+}
+
+float pink_fractal_rand(vec2 n) { 
+    return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+}
+
+float pink_fractal_noise(vec2 p){
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u*u*(3.0-2.0*u);
+
+    float res = mix(
+        mix(pink_fractal_rand(ip),pink_fractal_rand(ip+vec2(1.0,0.0)),u.x),
+        mix(pink_fractal_rand(ip+vec2(0.0,1.0)),pink_fractal_rand(ip+vec2(1.0,1.0)),u.x),u.y);
+    return res*res;
+}
+
+float pink_fractal_fbm( vec2 p ) {
+
+    return 0.516129 * pink_fractal_noise( p + GameTime * 1200.0);
+}
+
+void apply_pink_fractal() {
+    #ifdef FSH
+        vec2 uv = vec2(gl_FragCoord.xy) / 100.0;
+        float shade = pink_fractal_fbm(uv);
+        vec3 lighter_dark_pink = vec3(0.6, -0.6, 0.6); 
+        textData.color.rgb = mix(lighter_dark_pink, vec3(3.25, 3.136, 1.75), shade);
+        if(textData.isShadow) {
+            textData.color.rgb *= 0.25;
+        }
+    #endif
+}
+
+float fractal_rand(vec2 n) {
+    return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453);
+}
+
+float fractal_noise(vec2 p) {
+    vec2 ip = floor(p);
+    vec2 u = fract(p);
+    u = u * u * (3.0 - 2.0 * u);
+
+    float res = mix(
+        mix(fractal_rand(ip), fractal_rand(ip + vec2(1.0, 0.0)), u.x),
+        mix(fractal_rand(ip + vec2(0.0, 1.0)), fractal_rand(ip + vec2(1.0, 1.0)), u.x),
+        u.y
+    );
+    return res * res;
+}
+
+float fractal_fbm(vec2 p) {
+    return 0.516129 * fractal_noise(p + GameTime * 1200.0);
+}
+
+void apply_rainbow_fractal() {
+    #ifdef FSH
+        vec2 uv = vec2(gl_FragCoord.xy) / 100.0;
+        float fractalShade = fractal_fbm(uv);
+        float baseHue = 0.005 * (textData.position.x + textData.position.y) - GameTime * 300.0;
+        float hue = mod(baseHue + fractalShade, 1.0);
+
+        textData.color.rgb = hsvToRgb(vec3(hue, 0.7, 1.0));
+
+        if (textData.isShadow) {
+            textData.color.rgb *= 0.25;
+        }
+    #endif
+}
+
+void apply_pale_rainbow_fractal() {
+    #ifdef FSH
+        vec2 uv = vec2(gl_FragCoord.xy) / 100.0;
+        float fractalShade = fractal_fbm(uv);
+        float baseHue = 0.005 * (textData.position.x + textData.position.y) - GameTime * 300.0;
+        float hue = mod(baseHue + fractalShade, 1.0);
+
+        textData.color.rgb = hsvToRgb(vec3(hue, 0.4, 1.2));
+
+        if (textData.isShadow) {
+            textData.color.rgb *= 0.25;
+        }
+    #endif
 }
 
 void apply_shimmer(float speed, float intensity) {
@@ -224,7 +459,7 @@ void apply_shimmer(){
 }
 
 void apply_chromatic_abberation() {
-    textData.shouldScale = true;
+    textData.shouldScale = false;
     float noiseX = noise(GameTime * 12000.0) - 0.5;
     float noiseY = noise(GameTime * 12000.0 + 19732.134) - 0.5;
     vec2 offset = vec2(0.5 / 256, 0.0) + vec2(0.5, 1.0) * vec2(noiseX, noiseY) / 256;
@@ -264,7 +499,7 @@ void apply_metalic(vec3 color) {
 }
 
 void apply_fire() {
-    textData.shouldScale = true;
+    textData.shouldScale = false;
     if(textData.isShadow) return;
 
     float h = fract(textData.uv.y * 256.0);
@@ -463,7 +698,7 @@ bool applySpheyaPack9() {
     vec2 ip3 = vctfx_ipos3.xy / vctfx_ipos3.z;
     vec2 ip4 = vctfx_ipos4.xy / vctfx_ipos4.z;
     vec2 innerMin = min(ip1.xy,min(ip2.xy,min(ip3.xy,ip4.xy)));
-    vec2 innerMax = max(ip1.xy,max(ip2.xy,min(ip3.xy,ip4.xy)));
+    vec2 innerMax = max(ip1.xy,max(ip2.xy,max(ip3.xy,ip4.xy)));
     vec2 innerSize = innerMax - innerMin;
     
     vec2 uvp1 = vctfx_uvpos1.xy / vctfx_uvpos1.z;
