@@ -398,4 +398,10 @@ TEXT_EFFECT(240, 244, 116) { // enchanted amethyst #F0F474
     textData.shouldScale = true;
 }
 
+TEXT_EFFECT(240, 244, 120) { // #F0F478
+    override_text_color(rgb(252, 255, 0));
+    apply_chromatic_abberation();
+    remove_text_shadow();
+}
 
+ 
