@@ -312,3 +312,8 @@ TEXT_EFFECT(240, 240, 244) { // pale rainbow fractal
     apply_pale_rainbow_fractal();
     textData.shouldScale = true;
 }
+
+TEXT_EFFECT(240, 240, 248) { // teal ocean
+    apply_animated_gradient_7_smoother(rgb(0, 191, 255), rgb(135, 206, 235), rgb(64, 224, 208), rgb(102, 205, 170), rgb(102, 205, 170), rgb(144, 238, 144), rgb(0, 255, 127));
+    textData.shouldScale = true;
+}
