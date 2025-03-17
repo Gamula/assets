@@ -270,7 +270,7 @@ TEXT_EFFECT(240, 240, 208) { // electric pulse
     textData.shouldScale = true;
 }
 
-TEXT_EFFECT(240, 240, 212) { // spring meadow
+TEXT_EFFECT(240, 240, 212) { // spring meadow #F0F0D4
     apply_animated_gradient_7_smoother(rgb(100, 253, 152), rgb(34, 214, 18), rgb(144, 238, 144), rgb(211, 254, 39), rgb(152, 251, 152), rgb(30, 162, 19), rgb(127, 255, 0));
     textData.shouldScale = true;
 }
