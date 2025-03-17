@@ -322,3 +322,80 @@ TEXT_EFFECT(240, 240, 252) { // white ocean #F0F0FC
     apply_animated_gradient_7_smoother(rgb(0, 191, 255), rgb(135, 206, 235), rgb(182, 226, 255), rgb(222, 242, 255), rgb(182, 226, 255), rgb(135, 206, 235), rgb(0, 191, 255));
     textData.shouldScale = true;
 }
+
+TEXT_EFFECT(240, 244, 60) { // moonlit orchid #F0F43C
+    apply_animated_gradient_7_smoother(rgb(186, 85, 211), rgb(218, 112, 214), rgb(255, 182, 193), rgb(221, 160, 221), rgb(230, 230, 250), rgb(138, 43, 226), rgb(75, 0, 130));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 64) { // molten gold #F0F440
+    apply_animated_gradient_7_smoother(rgb(255, 215, 0), rgb(255, 165, 0), rgb(255, 140, 0), rgb(218, 165, 32), rgb(184, 134, 11), rgb(205, 133, 63), rgb(139, 69, 19));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 68) { // twilight abyss #F0F444
+    apply_animated_gradient_7_smoother(rgb(25, 25, 112), rgb(0, 0, 128), rgb(0, 0, 139), rgb(72, 61, 139), rgb(106, 90, 205), rgb(123, 104, 238), rgb(147, 112, 219));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 72) { // coral kiss #F0F448
+    apply_animated_gradient_7_smoother(rgb(255, 127, 80), rgb(250, 128, 114), rgb(255, 69, 0), rgb(205, 92, 92), rgb(255, 160, 122), rgb(255, 182, 193), rgb(255, 218, 185));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 76) { // emerald mist #F0F44C
+    apply_animated_gradient_7_smoother(rgb(0, 128, 0), rgb(34, 139, 34), rgb(60, 179, 113), rgb(46, 139, 87), rgb(144, 238, 144), rgb(152, 251, 152), rgb(50, 205, 50));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 80) { // volcanic ember #F0F450
+    apply_animated_gradient_7_smoother(rgb(178, 34, 34), rgb(220, 20, 60), rgb(255, 69, 0), rgb(255, 99, 71), rgb(255, 140, 0), rgb(255, 215, 0), rgb(218, 165, 32));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 84) { // enchanted lagoon #F0F454
+    apply_animated_gradient_7_smoother(rgb(0, 255, 127), rgb(32, 178, 170), rgb(0, 206, 209), rgb(0, 191, 255), rgb(100, 149, 237), rgb(135, 206, 250), rgb(176, 224, 230));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 88) { // solar flare #F0F458
+    apply_animated_gradient_7_smoother(rgb(255, 140, 0), rgb(255, 99, 71), rgb(255, 69, 0), rgb(205, 92, 92), rgb(255, 0, 0), rgb(220, 20, 60), rgb(178, 34, 34));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 92) { // mystic haze #F0F45C
+    apply_animated_gradient_7_smoother(rgb(186, 85, 211), rgb(147, 112, 219), rgb(123, 104, 238), rgb(106, 90, 205), rgb(72, 61, 139), rgb(75, 0, 130), rgb(138, 43, 226));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 96) { // arctic breeze #F0F460
+    apply_animated_gradient_7_smoother(rgb(176, 224, 230), rgb(135, 206, 250), rgb(70, 130, 180), rgb(30, 144, 255), rgb(0, 191, 255), rgb(0, 206, 209), rgb(224, 255, 255));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 100) { // burning horizon #F0F464
+    apply_animated_gradient_7_smoother(rgb(255, 69, 0), rgb(205, 92, 92), rgb(255, 99, 71), rgb(255, 140, 0), rgb(255, 165, 0), rgb(255, 215, 0), rgb(218, 165, 32));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 104) { // golden nectar #F0F468
+    apply_animated_gradient_7_smoother(rgb(255, 223, 186), rgb(255, 165, 0), rgb(255, 140, 0), rgb(218, 165, 32), rgb(184, 134, 11), rgb(205, 133, 63), rgb(139, 69, 19));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 108) { // celestial twilight #F0F46C
+    apply_animated_gradient_7_smoother(rgb(0, 0, 128), rgb(25, 25, 112), rgb(0, 0, 139), rgb(72, 61, 139), rgb(106, 90, 205), rgb(123, 104, 238), rgb(147, 112, 219));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 112) { // amber glow #F0F470
+    apply_animated_gradient_7_smoother(rgb(255, 140, 0), rgb(255, 99, 71), rgb(255, 69, 0), rgb(205, 92, 92), rgb(255, 0, 0), rgb(220, 20, 60), rgb(178, 34, 34));
+    textData.shouldScale = true;
+}
+
+TEXT_EFFECT(240, 244, 116) { // enchanted amethyst #F0F474
+    apply_animated_gradient_7_smoother(rgb(186, 85, 211), rgb(147, 112, 219), rgb(123, 104, 238), rgb(106, 90, 205), rgb(72, 61, 139), rgb(75, 0, 130), rgb(138, 43, 226));
+    textData.shouldScale = true;
+}
+
+
