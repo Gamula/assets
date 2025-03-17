@@ -304,6 +304,11 @@ TEXT_EFFECT(240, 240, 236) { // scarlet passion
     apply_character_cycle(rgb(214, 29, 95), rgb(253, 100, 228), 5.0, 0.3); // Love
 }
 
+TEXT_EFFECT(240, 240, 240) { // teal ocean
+    apply_animated_gradient_7_smoother(rgb(0, 191, 255), rgb(135, 206, 235), rgb(64, 224, 208), rgb(102, 205, 170), rgb(102, 205, 170), rgb(144, 238, 144), rgb(0, 255, 127));
+    textData.shouldScale = true;
+}
+
 TEXT_EFFECT(240, 240, 240) { // rainbow fractal
     apply_rainbow_fractal();
     textData.shouldScale = true;
