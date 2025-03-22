@@ -186,6 +186,10 @@ TEXT_EFFECT(240, 240, 136) { // yellow #F0F088
     apply_animated_gradient_3(rgb(255, 145, 0), rgb(255, 255, 0), rgb(255, 255, 141));
 }
 
+TEXT_EFFECT(240, 240, 138) { // yellow #F0F08A
+    apply_animated_gradient_3(rgb(239, 177, 80), rgb(255, 255, 0), rgb(255, 255, 141));
+}
+
 TEXT_EFFECT(240, 240, 140) { // purple ##F0F08C
     apply_animated_gradient_3(rgb(136, 59, 252), rgb(224, 84, 229), rgb(143, 68, 232));
 }
