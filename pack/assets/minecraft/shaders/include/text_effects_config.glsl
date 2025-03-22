@@ -182,10 +182,6 @@ TEXT_EFFECT(240, 240, 132) { // blue #F0F084
     apply_animated_gradient_3(rgb(37, 70, 232), rgb(37, 135, 232), rgb(76, 205, 245));
 }
 
-TEXT_EFFECT(240, 240, 136) { // yellow #F0F088
-    apply_animated_gradient_3(rgb(255, 145, 0), rgb(255, 255, 0), rgb(255, 255, 141));
-}
-
 TEXT_EFFECT(240, 240, 138) { // yellow #F0F08A
     apply_animated_gradient_3(rgb(239, 177, 80), rgb(255, 255, 0), rgb(255, 255, 141));
 }
@@ -408,4 +404,7 @@ TEXT_EFFECT(240, 244, 120) { // #F0F478
     remove_text_shadow();
 }
 
+TEXT_EFFECT(240, 244, 124) { // yellow #F0F47C
+    apply_animated_gradient_3(rgb(239, 177, 80), rgb(255, 255, 0), rgb(255, 255, 141));
+}
  
