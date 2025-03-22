@@ -82,7 +82,6 @@
         {"predicate": {"custom_model_data": 122},"model": "item/custom/cosmetics/sprays/perrytheplatypus"},
         {"predicate": {"custom_model_data": 123},"model": "item/custom/cosmetics/sprays/troll"},
         {"predicate": {"custom_model_data": 124},"model": "item/custom/cosmetics/sprays/bonk"},
-        {"predicate": {"custom_model_data": 125},"model": "item/custom/cosmetics/sprays/cursed"},
         {"predicate": {"custom_model_data": 126},"model": "item/custom/cosmetics/sprays/doge"},
         {"predicate": {"custom_model_data": 127},"model": "item/custom/cosmetics/sprays/dont_know"},
         {"predicate": {"custom_model_data": 128},"model": "item/custom/cosmetics/sprays/evil_patrick"},
