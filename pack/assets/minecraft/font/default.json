@@ -690,6 +690,15 @@
       "height": 15
     },
     {
+      "file": "gamula/titles/hologram/odyssey_title.png",
+      "ascent": 15,
+      "type": "bitmap",
+      "chars": [
+        "╇"
+      ],
+      "height": 15
+    },    
+    {
       "ascent": 9,
       "chars": [
         ""
