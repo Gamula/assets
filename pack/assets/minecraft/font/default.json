@@ -682,12 +682,12 @@
     },
         {
       "file": "gamula/titles/hologram/pvpwars_title.png",
-      "ascent": 7,
+      "ascent": 12,
       "type": "bitmap",
       "chars": [
         "㊍"
       ],
-      "height": 7
+      "height": 50
     },
     {
       "ascent": 9,
