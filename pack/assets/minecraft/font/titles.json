@@ -3,14 +3,14 @@
         {
             "type": "space",
             "advances": {
-                " ": 8
+                " ": 16
             }
         },
         {
             "type": "bitmap",
             "file": "gamula/ui/fonts/titles.png",
-            "ascent": 10,
-            "height": 11,
+            "ascent": 20,
+            "height": 22,
             "chars": [
                 "abcdefghijklmnopqrstuvwxyz"
             ]
