@@ -8,7 +8,7 @@
         },
         {
             "type": "bitmap",
-            "file": "gamula:ui/fonts/fancy.png",
+            "file": "gamula:ui/fonts/fancy",
             "ascent": 7,
             "height": 7,
             "chars": [
