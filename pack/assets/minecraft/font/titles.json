@@ -8,7 +8,7 @@
         },
         {
             "type": "bitmap",
-            "file": "gamula:ui/fonts/titles",
+            "file": "gamula/ui/fonts/titles.png",
             "ascent": 8,
             "height": 9,
             "chars": [
