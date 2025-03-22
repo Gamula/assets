@@ -9,8 +9,8 @@
         {
             "type": "bitmap",
             "file": "gamula/ui/fonts/titles.png",
-            "ascent": 8,
-            "height": 9,
+            "ascent": 10,
+            "height": 11,
             "chars": [
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
             ]
