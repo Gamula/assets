@@ -682,21 +682,21 @@
     },
         {
       "file": "gamula/titles/hologram/pvpwars_title.png",
-      "ascent": 21,
+      "ascent": 16,
       "type": "bitmap",
       "chars": [
         "㊍"
       ],
-      "height": 18
+      "height": 19
     },
     {
       "file": "gamula/titles/hologram/odyssey_title.png",
-      "ascent": 21,
+      "ascent": 16,
       "type": "bitmap",
       "chars": [
         "╇"
       ],
-      "height": 18
+      "height": 19
     },    
     {
       "ascent": 9,
