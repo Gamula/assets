@@ -680,6 +680,15 @@
       "file": "gamula/titles/hologram/battlebox.png",
       "type": "bitmap"
     },
+        {
+      "file": "gamula/titles/hologram/pvpwars_title.png",
+      "ascent": 7,
+      "type": "bitmap",
+      "chars": [
+        "㊍"
+      ],
+      "height": 7
+    },
     {
       "ascent": 9,
       "chars": [
