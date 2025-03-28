@@ -80,8 +80,21 @@ jobs:
         id: publish-artifact
         uses: actions/github-script@v7
         env:
-          ARTIFACT: ${{ vars.DIST_PATH }}
+          ARTIFACT_PATH: ${{ vars.DIST_PATH }}
           ARTIFACT_MODE: ${{ steps.evaluate-mode.outputs.result }}
+        with:
+          script: |-
+            const { invoke } = await import("${{ github.workspace }}/actions/scripts/${{ github.action }}.js")
+            return await invoke(...arguments)
+
+      - name: "[build:dispatch] - update pack"
+        id: dispatch-updater
+        uses: actions/github-script@v7
+        env:
+          EVENT_ORG: ${{ github.repository_owner }}
+          EVENT_REPO: "modules"
+          EVENT_ID: "update_pack"
+          EVENT_PAYLOAD: ${{ steps.publish-artifact.outputs.result }}
         with:
           script: |-
             const { invoke } = await import("${{ github.workspace }}/actions/scripts/${{ github.action }}.js")
