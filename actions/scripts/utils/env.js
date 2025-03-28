@@ -23,3 +23,14 @@ export function getEnvOrThrow(key) {
 export function getEnvOrFallback(key, fallback) {
   return process.env[key] || fallback
 }
+
+/**
+ * Retrieve a workflow variable by `key`, throwing an error if it is `undefined`.
+ *
+ * @param {string} key - The key of the workflow variable.
+ * @returns {string} The value of the workflow variable.
+ * @throws If the workflow variable is not set.
+ */
+export function getWorkflowEnv(key) {
+  return getEnvOrThrow(`GITHUB_${key.toUpperCase()}`)
+}
