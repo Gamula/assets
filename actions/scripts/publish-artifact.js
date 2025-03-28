@@ -72,7 +72,6 @@ class GitArtifact {
       result.status = "created"
       result.tag = created.tag_name
       result.url = created.html_url
-      console.log(created)
       core.notice(`publish('${result.tag}'): created release with tag.`)
       core.info(`=> view at: ${result.url}`)
     }
@@ -86,10 +85,10 @@ class GitArtifact {
    * @returns The release response data or null if not found.
    */
   async validate() {
-    const { github } = this.bindings
+    const { octokit } = this.bindings
     const payload = this.payload("validate")
     // @ts-ignore
-    return github.rest.repos.getReleaseByTag(payload)
+    return octokit.rest.repos.getReleaseByTag(payload)
       .then(({ data }) => data)
       .catch(() => null)
   }
@@ -101,10 +100,10 @@ class GitArtifact {
    * @returns The release response data.
    */
   async release() {
-    const { github } = this.bindings
+    const { octokit } = this.bindings
     const payload = this.payload("release")
     // @ts-ignore
-    return github.rest.repos.createRelease(payload)
+    return octokit.rest.repos.createRelease(payload)
       .then(async ({ data }) => {
         await this.upload(data)
         return data
@@ -119,10 +118,10 @@ class GitArtifact {
    * @returns The upload response data.
    */
   async upload(release) {
-    const { github } = this.bindings
+    const { octokit } = this.bindings
     const payload = this.payload("upload", release)
     // @ts-ignore
-    return github.rest.repos.uploadReleaseAsset(payload)
+    return octokit.rest.repos.uploadReleaseAsset(payload)
       .then(({ data }) => data)
   }
 
