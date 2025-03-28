@@ -41,13 +41,11 @@ class GitArtifact {
    * Constructs a new GitArtifact instance.
    *
    * @param {import("@typings:github").Bindings} bindings - Bindings from the workflow.
-   * @param {string} artifact - Path to the artifact file.
-   * @param {string} mode - The mode of the artifact.
    */
-  constructor(bindings, artifact, mode) {
+  constructor(bindings) {
     this.bindings = bindings
-    this.mode = mode
-    this.path = path.resolve(artifact)
+    this.mode = getEnvOrThrow("ARTIFACT_MODE")
+    this.path = path.resolve(getEnvOrThrow("ARTIFACT_PATH"))
     this.file = path.basename(this.path)
     this.blob = fs.readFileSync(this.path)
     this.hash = fileChecksum(this.blob, "sha1")
@@ -64,16 +62,15 @@ class GitArtifact {
     const exists = await this.validate()
     if (exists) {
       result.status = "exists"
-      result.tag = exists.tag_name
+      result.version = exists.tag_name
       result.url = exists.html_url
-      core.error(`publish('${result.tag}'): skipping release, already exists.`)
+      core.error(`publish('${result.version}'): skipping release, already exists.`)
     } else {
       const created = await this.release()
       result.status = "created"
-      result.tag = created.tag_name
+      result.version = created.tag_name
       result.url = created.html_url
-      console.log(created)
-      core.notice(`publish('${result.tag}'): created release with tag.`)
+      core.notice(`publish('${result.version}'): created release with tag.`)
       core.info(`=> view at: ${result.url}`)
     }
     return result
@@ -86,10 +83,10 @@ class GitArtifact {
    * @returns The release response data or null if not found.
    */
   async validate() {
-    const { github } = this.bindings
+    const { octokit } = this.bindings
     const payload = this.payload("validate")
     // @ts-ignore
-    return github.rest.repos.getReleaseByTag(payload)
+    return octokit.rest.repos.getReleaseByTag(payload)
       .then(({ data }) => data)
       .catch(() => null)
   }
@@ -101,10 +98,10 @@ class GitArtifact {
    * @returns The release response data.
    */
   async release() {
-    const { github } = this.bindings
+    const { octokit } = this.bindings
     const payload = this.payload("release")
     // @ts-ignore
-    return github.rest.repos.createRelease(payload)
+    return octokit.rest.repos.createRelease(payload)
       .then(async ({ data }) => {
         await this.upload(data)
         return data
@@ -119,10 +116,10 @@ class GitArtifact {
    * @returns The upload response data.
    */
   async upload(release) {
-    const { github } = this.bindings
+    const { octokit } = this.bindings
     const payload = this.payload("upload", release)
     // @ts-ignore
-    return github.rest.repos.uploadReleaseAsset(payload)
+    return octokit.rest.repos.uploadReleaseAsset(payload)
       .then(({ data }) => data)
   }
 
@@ -206,11 +203,13 @@ class GitArtifact {
    * @returns The artifact details.
    */
   describe() {
+    const { context } = this.bindings
     return {
       path: this.path,
       file: this.file,
       hash: this.hash,
-      tag: "-",
+      manifest: context.ref,
+      version: "-",
       url: "-",
       status: "unknown",
     }
@@ -224,7 +223,5 @@ class GitArtifact {
  */
 export async function invoke(...args) {
   const bindings = transformArgs(args)
-  const artifact = getEnvOrThrow("ARTIFACT")
-  const mode = getEnvOrThrow("ARTIFACT_MODE")
-  return new GitArtifact(bindings, artifact, mode).run()
+  return new GitArtifact(bindings).run()
 }
