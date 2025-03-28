@@ -17,7 +17,7 @@ declare module "@typings:github" {
    */
   export type Types = {
     Requires: Record<"Proxied" | "Vanilla", NodeJS.Require>
-    GitHub: ReturnType<typeof github.getOctokit>
+    Octokit: ReturnType<typeof github.getOctokit>
     Context: typeof github.context
     Core: typeof core
     Exec: typeof exec
@@ -38,13 +38,14 @@ declare module "@typings:github" {
    * Note: Naming has changes for the following properties:
    * - `require` -> `__require__`
    * - `__original_require__` -> `__unused__`
+   * - `github` -> `octokit`
    *
    * @see {@link https://github.com/actions/github-script/blob/v7/src/async-function.ts#L10|@actions/github-script(async-function)}
    */
   export type Bindings = {
     __require__: Require["Proxied"]
     __unused__: Require["Vanilla"]
-    github: Types["GitHub"]
+    octokit: Types["Octokit"]
     context: Types["Context"]
     core: Types["Core"]
     exec: Types["Exec"]
@@ -61,7 +62,7 @@ declare module "@typings:github" {
   export type Arguments = Tuple<Bindings, [
     "__require__",
     "__unused__",
-    "github",
+    "octokit",
     "context",
     "core",
     "exec",
