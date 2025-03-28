@@ -9,7 +9,7 @@ export function transformArgs(args) {
   return {
     __require__: args[0],
     __unused__: args[1],
-    github: args[2],
+    octokit: args[2],
     context: args[3],
     core: args[4],
     exec: args[5],
