@@ -1,0 +1,7 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "gamula/dyeable/vial_outline",
+        "layer1": "gamula/dyeable/vial_accent"
+    }
+}
