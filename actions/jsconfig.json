@@ -25,8 +25,7 @@
     "baseUrl": "scripts",
     "outDir": "dist",
     "paths": {
-      "@*": ["*.js", "*.cjs", "*.mjs", "*.d.ts"]
+      "@*": ["*"]
     }
-  },
-  "include": ["**/*.js", "**/*.cjs", "**/*.mjs", "**/*.d.ts"]
+  }
 }
